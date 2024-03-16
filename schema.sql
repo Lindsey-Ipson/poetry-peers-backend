@@ -3,7 +3,8 @@ CREATE TABLE users (
   password VARCHAR(25) NOT NULL,
   first_name VARCHAR(200) NOT NULL,
   last_name VARCHAR(200) NOT NULL,
-  email VARCHAR(200) NOT NULL CHECK (position('@' IN email) > 1)
+  email VARCHAR(200) NOT NULL CHECK (position('@' IN email) > 1),
+  is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE poems (

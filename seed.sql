@@ -1,8 +1,8 @@
-INSERT INTO users (username, password, first_name, last_name, email)
+INSERT INTO users (username, password, first_name, last_name, email, is_admin)
 VALUES
-    ('user1', 'password1', 'John', 'Doe', 'john.doe@example.com'),
-    ('user2', 'password2', 'Jane', 'Smith', 'jane.smith@example.com'),
-    ('user3', 'password3', 'Jacob', 'Smith', 'jacob.smith@example.com');
+    ('user1', 'password1', 'John', 'Doe', 'john.doe@example.com', TRUE),
+    ('user2', 'password2', 'Jane', 'Smith', 'jane.smith@example.com', FALSE),
+    ('user3', 'password3', 'Jacob', 'Smith', 'jacob.smith@example.com', FALSE);
 
 INSERT INTO poems (title, author, line_count, lines)
 VALUES
