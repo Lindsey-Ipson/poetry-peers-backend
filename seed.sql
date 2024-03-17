@@ -16,11 +16,11 @@ VALUES
     ('Theme 2'),
     ('Theme 3');
 
-INSERT INTO tags (theme_name, poem_id, highlighted_lines, explanation)
+INSERT INTO tags (theme_name, poem_id, highlighted_lines, Analysis)
 VALUES
-    ('Theme 1', 1, ARRAY[1, 3], 'Explanation for Theme 1 in Poem 1'),
-    ('Theme 2', 2, ARRAY[1, 2], 'Explanation for Theme 2 in Poem 2'),
-    ('Theme 3', 3, ARRAY[3, 4], 'Explanation for Theme 3 in Poem 3');
+    ('Theme 1', 1, ARRAY[1, 3], 'Analysis for Theme 1 in Poem 1'),
+    ('Theme 2', 2, ARRAY[1, 2], 'Analysis for Theme 2 in Poem 2'),
+    ('Theme 3', 3, ARRAY[3, 4], 'Analysis for Theme 3 in Poem 3');
 
 INSERT INTO comments (theme_name, poem_id, comment_text)
 VALUES

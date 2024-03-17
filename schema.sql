@@ -22,9 +22,10 @@ CREATE TABLE themes (
 CREATE TABLE tags (
   theme_name VARCHAR(100) REFERENCES themes ON DELETE CASCADE,
   poem_id INTEGER REFERENCES poems ON DELETE CASCADE,
-  PRIMARY KEY (theme_name, poem_id),
   highlighted_lines INTEGER[],
-  explanation TEXT,
+  PRIMARY KEY (theme_name, poem_id, highlighted_lines),
+  analysis TEXT,
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
   datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -32,8 +33,20 @@ CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     theme_name VARCHAR(100) NOT NULL,
     poem_id INTEGER NOT NULL,
-    FOREIGN KEY (theme_name, poem_id) REFERENCES tags(theme_name, poem_id) ON DELETE CASCADE,
+    highlighted_lines INTEGER[],
+    FOREIGN KEY (theme_name, poem_id, highlighted_lines) REFERENCES tags(theme_name, poem_id, highlighted_lines) ON DELETE CASCADE,
     username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
     comment_text TEXT NOT NULL,
     datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+CREATE TABLE example_table (
+    foreign_key1 INTEGER,
+    foreign_key2 INTEGER,
+    foreign_key3 INTEGER,
+    PRIMARY KEY (foreign_key1, foreign_key2, foreign_key3),
+    FOREIGN KEY (foreign_key1) REFERENCES table1(primary_key),
+    FOREIGN KEY (foreign_key2) REFERENCES table2(primary_key),
+    FOREIGN KEY (foreign_key3) REFERENCES table3(primary_key)
 );

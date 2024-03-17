@@ -9,8 +9,6 @@ const {
 
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
-/** Related functions for users */
-
 class User {
   /** Authenticate user with username, password
    * Returns { username, first_name, last_name, email, is_admin }
@@ -73,14 +71,13 @@ class User {
             last_name,
             email)
            VALUES ($1, $2, $3, $4, $5)
-           RETURNING username, first_name AS "firstName", last_name AS "lastName", email`,
+           RETURNING username, first_name AS "firstName", last_name AS "lastName", email, is_admin`,
         [
           username,
           hashedPassword,
           firstName,
           lastName,
           email,
-          isAdmin,
         ],
     );
 
@@ -93,7 +90,7 @@ class User {
    * Returns [{ username, first_name, last_name, email, is_admin }, ...]
    **/
 
-  static async findAll() {
+  static async findAll () {
     const result = await db.query(
           `SELECT username,
                   first_name AS "firstName",
@@ -112,7 +109,7 @@ class User {
    * Throws NotFoundError if user not found.
    **/
 
-  static async get(username) {
+  static async get (username) {
     const userRes = await db.query(
           `SELECT username,
                   first_name AS "firstName",
@@ -142,7 +139,7 @@ class User {
    * Callers of this function must be certain they have validated inputs to this or serious security risks are opened.
    */
 
-  static async update(username, data) {
+  static async update (username, data) {
     if (data.password) {
       data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
     }
@@ -175,7 +172,7 @@ class User {
 
   /** Delete given user from database; returns undefined. */
 
-  static async remove(username) {
+  static async remove (username) {
     let result = await db.query(
           `DELETE
            FROM users
@@ -189,6 +186,5 @@ class User {
   }
 
 }
-
 
 module.exports = User;
