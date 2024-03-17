@@ -39,14 +39,3 @@ CREATE TABLE comments (
     comment_text TEXT NOT NULL,
     datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-
-CREATE TABLE example_table (
-    foreign_key1 INTEGER,
-    foreign_key2 INTEGER,
-    foreign_key3 INTEGER,
-    PRIMARY KEY (foreign_key1, foreign_key2, foreign_key3),
-    FOREIGN KEY (foreign_key1) REFERENCES table1(primary_key),
-    FOREIGN KEY (foreign_key2) REFERENCES table2(primary_key),
-    FOREIGN KEY (foreign_key3) REFERENCES table3(primary_key)
-);
