@@ -3,25 +3,26 @@ const { BadRequestError, NotFoundError } = require("../expressError");
 
 class Comment {
   /** Create a comment (from data), update db, return new comment data.
-   * Data should be { themeName, poemId, highlightedLines, username, commentText }
-   * Returns { comment_id, themeName, poemId, highlightedLines, username, commentText, datetime }
+   * Data should be { themeName, poemId, highlightedLines, commentText, username }
+   * Returns { comment_id, themeName, poemId, highlightedLines, commentText, username, datetime }
    */
-  static async create({ themeName, poemId, highlightedLines, username, commentText }) {
+  static async create({ themeName, poemId, highlightedLines, commentText, username }) {
     const result = await db.query(
       `INSERT INTO comments (theme_name, 
                              poem_id, 
                              highlighted_lines,
-                             username,
-                             comment_text)
+                             comment_text,
+                             username
+                             )
        VALUES ($1, $2, $3, $4, $5)
        RETURNING comment_id,
                  theme_name AS "themeName", 
                  poem_id AS "poemId", 
                  highlighted_lines AS "highlightedLines",
-                 username,
                  comment_text AS "commentText", 
+                 username,
                  datetime`,
-      [themeName, poemId, highlightedLines, username, commentText]
+      [themeName, poemId, highlightedLines, commentText, username]
     );
     const comment = result.rows[0];
 
@@ -31,7 +32,7 @@ class Comment {
   /** Find comments by tag (tag's PK consists of theme_name, poem_id, highlighted_lines).
    * Returns an array of comments associated with the tag.
    */
-  static async findByTag(themeName, poemId, highlightedLines) {
+  static async findByTagId(themeName, poemId, highlightedLines) {
     const result = await db.query(
       `SELECT comment_id AS "commentId",
               comment_text AS "commentText", 

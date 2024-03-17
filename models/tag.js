@@ -3,19 +3,19 @@ const { BadRequestError, NotFoundError } = require("../expressError");
 
 class Tag {
   /** Create a tag (from data), update db, return new tag data.
-   * Data should be { theme_name, poem_id, highlighted_lines, analysis }
-   * Returns { theme_name, poem_id, highlighted_lines, analysis }
+   * Data should be { theme_name, poem_id, highlighted_lines, analysis, username }
+   * Returns { theme_name, poem_id, highlighted_lines, analysis, username }
    * Throws BadRequestError if tag already in database with same exact combination of theme_name, poem_id, and highlighted_lines.
    * */
 
-  static async create({ themeName, poemId, highlightedLines, analysis }) {
+  static async create({ themeName, poemId, highlightedLines, analysis, username }) {
     const duplicateCheck = await db.query(
           `SELECT theme_name,
-                  poem_id
+                  poem_id,
                   highlighted_lines
            FROM tags
-           WHERE theme_name = $1,
-                  poem_id = $2,
+           WHERE theme_name = $1 AND
+                  poem_id = $2 AND
                   highlighted_lines = $3`,
         [themeName, poemId, highlightedLines]);
 
@@ -26,17 +26,20 @@ class Tag {
           `INSERT INTO tags (theme_name, 
                             poem_id, 
                             highlighted_lines, 
-                            analysis)
-          VALUES ($1, $2, $3, $4)
+                            analysis,
+                            username)
+          VALUES ($1, $2, $3, $4, $5)
           RETURNING theme_name AS "themeName", 
                     poem_id AS "poemId", 
                     highlighted_lines AS "highlightedLines",
                     analysis, 
+                    username,
                     datetime`,
           [themeName, 
           poemId, 
           highlightedLines, 
-          analysis
+          analysis,
+          username
           ],
     );
     const tag = result.rows[0];

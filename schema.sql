@@ -1,6 +1,6 @@
 CREATE TABLE users (
   username VARCHAR(25) PRIMARY KEY,
-  password VARCHAR(25) NOT NULL,
+  password TEXT NOT NULL,
   first_name VARCHAR(200) NOT NULL,
   last_name VARCHAR(200) NOT NULL,
   email VARCHAR(200) NOT NULL CHECK (position('@' IN email) > 1),

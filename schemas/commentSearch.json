@@ -3,31 +3,26 @@
   "$id": "http://our.company.com/companyNew.schema.json",
   "type": "object",
   "properties": {
-    "title": {
+    "themeName": {
       "type": "string",
       "minLength": 1,
-      "maxLength": 300
+      "maxLength": 100
     },
-    "author": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 200
-    },
-    "lineCount": {
+    "poemId": {
       "type": "integer"
     },
-    "lines": {
+    "highlightedLines": {
       "type": "array",
       "items": {
-        "type": "string"
+        "type": "integer"
       },
       "minItems": 1
     }
   },
   "additionalProperties": false,
   "required": [
-    "title",
-    "author",
-    "lines"
+    "themeName",
+    "poemId",
+    "highlightedLines"
   ]
 }

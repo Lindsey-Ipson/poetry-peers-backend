@@ -3,15 +3,15 @@
   "$id": "http://our.company.com/companyNew.schema.json",
   "type": "object",
   "properties": {
-    "theme_name": {
+    "themeName": {
       "type": "string",
       "minLength": 1,
       "maxLength": 100
     },
-    "poem_id": {
+    "poemId": {
       "type": "integer"
     },
-    "highlighted_lines": {
+    "highlightedLines": {
       "type": "array",
       "items": {
         "type": "integer"
@@ -23,16 +23,16 @@
       "minLength": 1,
       "maxLength": 25
     },
-    "comment_text": {
+    "commentText": {
       "type": "string"
     }
   },
   "additionalProperties": false,
   "required": [
-    "theme_name",
-    "poem_id",
-    "highlighted_lines",
+    "themeName",
+    "poemId",
+    "highlightedLines",
     "username",
-    "comment_text"
+    "commentText"
   ]
 }
