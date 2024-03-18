@@ -9,7 +9,7 @@
       "maxLength": 100
     },
     "poemId": {
-      "type": "integer"
+      "type": "string"
     },
     "highlightedLines": {
       "type": "array",

@@ -3,6 +3,9 @@
   "$id": "http://our.company.com/companyNew.schema.json",
   "type": "object",
   "properties": {
+    "id": {
+      "type": "string"
+    },
     "title": {
       "type": "string",
       "minLength": 1,

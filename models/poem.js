@@ -9,23 +9,23 @@ class Poem {
    * Throws BadRequestError if a poem with the same title and author already exists in the database.
    */
 
-  static async create({ title, author, lineCount, lines }) {
+  static async create({ id, title, author, lineCount, lines }) {
 
     const duplicateCheck = await db.query(
-      `SELECT id
+      `SELECT title, author
        FROM poems
-       WHERE title = $1 AND author = $2`,
-      [title, author]
+       WHERE id = $1`,
+      [id]
     );
 
     if (duplicateCheck.rows[0])
       throw new BadRequestError(`Duplicate poem: ${title} by ${author}`);
 
     const result = await db.query(
-      `INSERT INTO poems (title, author, line_count, lines)
-       VALUES ($1, $2, $3, $4)
+      `INSERT INTO poems (id, title, author, line_count, lines)
+       VALUES ($1, $2, $3, $4, $5)
        RETURNING id, title, author, line_count AS "lineCount", lines`,
-      [title, author, lineCount, lines]
+      [id, title, author, lineCount, lines]
     );
     const poem = result.rows[0];
 

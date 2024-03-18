@@ -8,7 +8,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE poems (
-  id SERIAL PRIMARY KEY,
+  id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
   author VARCHAR(200) NOT NULL,
   line_count INTEGER,
@@ -21,7 +21,7 @@ CREATE TABLE themes (
 
 CREATE TABLE tags (
   theme_name VARCHAR(100) NOT NULL REFERENCES themes ON DELETE CASCADE,
-  poem_id INTEGER NOT NULL REFERENCES poems ON DELETE CASCADE,
+  poem_id TEXT NOT NULL REFERENCES poems ON DELETE CASCADE,
   highlighted_lines INTEGER[] NOT NULL,
   PRIMARY KEY (theme_name, poem_id, highlighted_lines),
   analysis TEXT NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE tags (
 CREATE TABLE comments (
     comment_id SERIAL PRIMARY KEY,
     theme_name VARCHAR(100) NOT NULL,
-    poem_id INTEGER NOT NULL,
+    poem_id TEXT NOT NULL,
     highlighted_lines INTEGER[] NOT NULL,
     FOREIGN KEY (theme_name, poem_id, highlighted_lines) REFERENCES tags(theme_name, poem_id, highlighted_lines) ON DELETE CASCADE,
     comment_text TEXT NOT NULL,

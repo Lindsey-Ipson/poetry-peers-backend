@@ -39,8 +39,7 @@ router.get("/by-tag", async function (req, res, next) {
     // Extracting each part of the composite key from query parameters
     let { themeName, poemId, highlightedLines } = req.query;
 
-    // Transform poemId to integer and highlightedLines to an array
-    poemId = +poemId;
+    // Transform highlightedLines to an array
     highlightedLines = highlightedLines.split(",").map(Number);
 
     const validator = jsonschema.validate({ themeName, poemId, highlightedLines }, commentSearchSchema);
@@ -56,22 +55,12 @@ router.get("/by-tag", async function (req, res, next) {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
 /** GET route to find comments by username
- * GET /poem/:poemId =>
+ * GET /by-user/:username =>
  * {comments: [ { theme_name, poem_id, highlighted_lines, analysis, username }, ...] }
  */
 
-router.get("/user/:username", async function (req, res, next) {
+router.get("/by-user/:username", async function (req, res, next) {
   try {
     const username = req.params.username;
     const comments = await Comment.findByUsername(username);
