@@ -7,7 +7,7 @@ class Theme {
    * data should be { name }
    * Returns { name }
    **/
-  static async create({ name }) {
+  static async create ({name}) {
     name = capitalizeWords(name);
 
     const duplicateCheck = await db.query(
