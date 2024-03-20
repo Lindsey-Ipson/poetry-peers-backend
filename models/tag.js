@@ -107,6 +107,23 @@ class Tag {
     return result.rows;
   }
 
+    /** Delete tag from database; returns message. */
+
+    static async remove ({ themeName, poemId, highlightedLines }) {
+      let result = await db.query(
+            `DELETE
+             FROM tags
+             WHERE theme_name = $1 AND poem_id = $2 AND highlighted_lines = $3
+             RETURNING theme_name AS "themeName", poem_id AS "poemId", highlighted_lines AS "highlightedLines"`,
+          [themeName, poemId, highlightedLines],
+      );
+      const deletedTag = result.rows[0];
+  
+      if (!deletedTag) throw new NotFoundError(`No such tag: ${themeName, poemId, highlightedLines}`);
+
+      return deletedTag;
+    }
+
 }
 
 module.exports = Tag;

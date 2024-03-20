@@ -6,6 +6,8 @@ const Tag = require("../models/tag");
 
 const tagNewSchema = require("../schemas/tagNew.json");
 
+const { ensureCorrectUserOrAdmin } = require("../middleware/auth");
+
 const router = new express.Router();
 
 /** POST / { tag } =>  { tag }
@@ -58,6 +60,11 @@ router.get("/by-user/:username", async function (req, res, next) {
   }
 });
 
+/** GET route to find tags by themeName
+ * GET /by-theme/:themeName =>
+ * {tags: [ { theme_name, poem_id, highlighted_lines, analysis, username }, ...] }
+ */
+
 router.get("/by-theme/:themeName", async function (req, res, next) {
   try {
     const themeName = req.params.themeName;
@@ -67,5 +74,26 @@ router.get("/by-theme/:themeName", async function (req, res, next) {
     return next(err);
   }
 });
+
+/* Delete tag by composite key of themeName, poemId, and highlightedLines
+ * Returns deleted key
+*/
+router.delete("/", ensureCorrectUserOrAdmin, async function (req, res, next) {
+  try {
+    // Extracting each part of the composite key from query parameters
+    let { themeName, poemId, highlightedLines } = req.query;
+
+    // Transform highlightedLines to an array
+    highlightedLines = highlightedLines.split(",").map(Number);
+
+    const deletedTag = await Tag.remove({ themeName, poemId, highlightedLines });
+
+    return res.json({ deleted: deletedTag });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
 
 module.exports = router;
