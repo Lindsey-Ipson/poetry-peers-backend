@@ -58,4 +58,14 @@ router.get("/by-user/:username", async function (req, res, next) {
   }
 });
 
+router.get("/by-theme/:themeName", async function (req, res, next) {
+  try {
+    const themeName = req.params.themeName;
+    const tags = await Tag.findByThemeName(themeName);
+    return res.json({ tags });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 module.exports = router;

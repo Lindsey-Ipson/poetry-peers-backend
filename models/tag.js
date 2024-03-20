@@ -84,6 +84,29 @@ class Tag {
 
     return result.rows;
   }
+
+
+  /** Get all tags for a given theme id.
+   * Returns [{ theme_name, poem_id, highlighted_lines, analysis, username, datetime }, ...]
+   * Case sensitive.
+   */
+  static async findByThemeName(themeName) {
+    const result = await db.query(
+      `SELECT theme_name AS "themeName",
+              poem_id AS "poemId",
+              highlighted_lines AS "highlightedLines",
+              analysis,
+              username,
+              datetime
+      FROM tags
+      WHERE theme_name = $1
+      ORDER BY datetime DESC`,
+      [themeName]
+    );
+
+    return result.rows;
+  }
+
 }
 
 module.exports = Tag;
