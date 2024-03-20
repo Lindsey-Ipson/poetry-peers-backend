@@ -78,7 +78,7 @@ router.get("/by-theme/:themeName", async function (req, res, next) {
 /* Delete tag by composite key of themeName, poemId, and highlightedLines
  * Returns deleted key
 */
-router.delete("/", ensureCorrectUserOrAdmin, async function (req, res, next) {
+router.delete("/", async function (req, res, next) {
   try {
     // Extracting each part of the composite key from query parameters
     let { themeName, poemId, highlightedLines } = req.query;

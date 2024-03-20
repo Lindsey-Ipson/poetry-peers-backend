@@ -117,9 +117,10 @@ class Tag {
              RETURNING theme_name AS "themeName", poem_id AS "poemId", highlighted_lines AS "highlightedLines"`,
           [themeName, poemId, highlightedLines],
       );
+
       const deletedTag = result.rows[0];
   
-      if (!deletedTag) throw new NotFoundError(`No such tag: ${themeName, poemId, highlightedLines}`);
+      if (!deletedTag) throw new NotFoundError(`No such tag: ${themeName}, ${poemId}, ${highlightedLines}`);
 
       return deletedTag;
     }
