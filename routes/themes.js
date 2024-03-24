@@ -1,11 +1,8 @@
 const jsonschema = require("jsonschema");
 const express = require("express");
-
 const { BadRequestError } = require("../expressError");
 const Theme = require("../models/theme");
-
 const themeNewSchema = require("../schemas/themeNew.json");
-
 const router = new express.Router();
 
 /** POST / { theme } =>  { theme }

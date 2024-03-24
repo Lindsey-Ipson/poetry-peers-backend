@@ -1,13 +1,8 @@
 const jsonschema = require("jsonschema");
 const express = require("express");
-
 const { BadRequestError } = require("../expressError");
 const Tag = require("../models/tag");
-
 const tagNewSchema = require("../schemas/tagNew.json");
-
-const { ensureCorrectUserOrAdmin } = require("../middleware/auth");
-
 const router = new express.Router();
 
 /** POST / { tag } =>  { tag }
@@ -93,7 +88,5 @@ router.delete("/", async function (req, res, next) {
     return next(err);
   }
 });
-
-
 
 module.exports = router;

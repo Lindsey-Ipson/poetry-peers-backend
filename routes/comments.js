@@ -1,9 +1,7 @@
 const jsonschema = require("jsonschema");
 const express = require("express");
-
 const { BadRequestError } = require("../expressError");
 const Comment = require("../models/comment");
-
 const commentNewSchema = require("../schemas/commentNew.json");
 const commentSearchSchema = require("../schemas/commentSearch.json");
 

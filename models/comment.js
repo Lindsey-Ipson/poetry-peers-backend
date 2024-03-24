@@ -1,12 +1,11 @@
 const db = require("../db");
-const { BadRequestError, NotFoundError } = require("../expressError");
 
 class Comment {
   /** Create a comment (from data), update db, return new comment data.
    * Data should be { themeName, poemId, highlightedLines, commentText, username }
    * Returns { comment_id, themeName, poemId, highlightedLines, commentText, username, datetime }
    */
-  static async create({ themeName, poemId, highlightedLines, commentText, username }) {
+  static async create ({ themeName, poemId, highlightedLines, commentText, username }) {
     const result = await db.query(
       `INSERT INTO comments (theme_name, 
                              poem_id, 
@@ -32,7 +31,7 @@ class Comment {
   /** Find comments by tag (tag's PK consists of theme_name, poem_id, highlighted_lines).
    * Returns an array of comments associated with the tag.
    */
-  static async findByTagId(themeName, poemId, highlightedLines) {
+  static async findByTagId (themeName, poemId, highlightedLines) {
     const result = await db.query(
       `SELECT comment_id AS "commentId",
               comment_text AS "commentText", 
@@ -51,7 +50,7 @@ class Comment {
   /** Find comments by username.
    * Returns an array of comments created by the username.
    */
-  static async findByUsername(username) {
+  static async findByUsername (username) {
     const result = await db.query(
       `SELECT comment_id AS "commentId",
               theme_name AS "themeName",

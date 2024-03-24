@@ -1,5 +1,4 @@
 const jsonschema = require("jsonschema");
-
 const express = require("express");
 const { ensureCorrectUserOrAdmin, ensureAdmin } = require("../middleware/auth");
 const { BadRequestError } = require("../expressError");
@@ -69,7 +68,6 @@ router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, n
     return next(err);
   }
 });
-
 
 /** DELETE /[username]  =>  { deleted: username }
  * Authorization required: admin or same-user-as-:username

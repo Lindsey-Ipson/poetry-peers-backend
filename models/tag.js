@@ -8,7 +8,7 @@ class Tag {
    * Throws BadRequestError if tag already in database with same exact combination of theme_name, poem_id, and highlighted_lines.
    * */
 
-  static async create({ themeName, poemId, highlightedLines, analysis, username }) {
+  static async create ({ themeName, poemId, highlightedLines, analysis, username }) {
     const duplicateCheck = await db.query(
           `SELECT theme_name,
                   poem_id,
@@ -50,7 +50,7 @@ class Tag {
   /** Find tags by poemId.
    * Returns an array of tags associated with the poemId.
    */
-  static async findByPoemId(poemId) {
+  static async findByPoemId (poemId) {
     const result = await db.query(
       `SELECT theme_name AS "themeName",
               poem_id AS "poemId",
@@ -69,7 +69,7 @@ class Tag {
   /** Find tags by username.
    * Returns an array of tags created by the username.
    */
-  static async findByUsername(username) {
+  static async findByUsername (username) {
     const result = await db.query(
       `SELECT theme_name AS "themeName",
               poem_id AS "poemId",
@@ -90,7 +90,7 @@ class Tag {
    * Returns [{ theme_name, poem_id, highlighted_lines, analysis, username, datetime }, ...]
    * Case sensitive.
    */
-  static async findByThemeName(themeName) {
+  static async findByThemeName (themeName) {
     const result = await db.query(
       `SELECT theme_name AS "themeName",
               poem_id AS "poemId",

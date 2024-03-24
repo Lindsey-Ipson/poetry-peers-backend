@@ -4,12 +4,12 @@ const { BadRequestError, NotFoundError } = require("../expressError");
 class Poem {
 
   /** Create a poem (from data), update db, return new poem data.
-   * Data should be { title, author, lineCount, lines }
+   * Data should be { id, title, author, lineCount, lines }
    * Returns { id, title, author, lineCount, lines }
-   * Throws BadRequestError if a poem with the same title and author already exists in the database.
+   * Throws BadRequestError if a poem with the same id (title and author hash) already exists in the database.
    */
 
-  static async create({ id, title, author, lineCount, lines }) {
+  static async create ({ id, title, author, lineCount, lines }) {
 
     const duplicateCheck = await db.query(
       `SELECT title, author
@@ -37,7 +37,7 @@ class Poem {
    * Throws NotFoundError if not found.
    */
 
-  static async get(id) {
+  static async get (id) {
     const poemRes = await db.query(
       `SELECT id, title, author, line_count AS "lineCount", lines
        FROM poems

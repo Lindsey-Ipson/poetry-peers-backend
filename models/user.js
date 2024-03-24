@@ -14,7 +14,6 @@ class User {
    * Returns { username, first_name, last_name, email, is_admin }
    * Throws UnauthorizedError is user not found or wrong password
    **/
-
   static async authenticate (username, password) {
     // Try to get user first
     const result = await db.query(
@@ -47,9 +46,7 @@ class User {
    * Returns { username, firstName, lastName, email }
    * Throws BadRequestError on duplicates.
    **/
-
-  static async register(
-      { username, password, firstName, lastName, email }) {
+  static async register ({ username, password, firstName, lastName, email }) {
     const duplicateCheck = await db.query(
           `SELECT username
            FROM users
@@ -89,7 +86,6 @@ class User {
   /** Find all users.
    * Returns [{ username, first_name, last_name, email, is_admin }, ...]
    **/
-
   static async findAll () {
     const result = await db.query(
           `SELECT username,
@@ -108,7 +104,6 @@ class User {
    * Returns { username, first_name, last_name, is_admin }
    * Throws NotFoundError if user not found.
    **/
-
   static async get (username) {
     const userRes = await db.query(
           `SELECT username,

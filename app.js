@@ -1,8 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-
 const { NotFoundError } = require("./expressError");
-
 const { authenticateJWT } = require("./middleware/auth");
 const authRoutes = require("./routes/auth");
 const usersRoutes = require("./routes/users");
@@ -10,7 +8,6 @@ const poemsRoutes = require("./routes/poems");
 const themesRoutes = require("./routes/themes");
 const tagsRoutes = require("./routes/tags");
 const commentsRoutes = require("./routes/comments");
-
 const morgan = require("morgan");
 
 const app = express();

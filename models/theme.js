@@ -37,7 +37,7 @@ class Theme {
    * - name
    * Returns [{ name }, ...]
    **/
-  static async findAll({ name } = {}) {
+  static async findAll ({ name } = {}) {
     let query = `SELECT name FROM themes`;
     let whereExpressions = [];
     let queryValues = [];

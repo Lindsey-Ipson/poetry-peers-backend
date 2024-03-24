@@ -1,16 +1,12 @@
 const jsonschema = require("jsonschema");
 const express = require("express");
-
 const { BadRequestError } = require("../expressError");
-const { ensureAdmin } = require("../middleware/auth");
 const Poem = require("../models/poem");
-
 const poemNewSchema = require("../schemas/poemNew.json");
-
 const router = new express.Router();
 
 /** POST / { poem } =>  { poem }
- * poem should be { title, author, lineCount, lines }
+ * Poem should be { title, author, lineCount, lines }
  * Returns { id, title, author, lineCount, lines }
  */
 
