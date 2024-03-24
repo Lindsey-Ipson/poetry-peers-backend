@@ -68,7 +68,7 @@ class User {
             last_name,
             email)
            VALUES ($1, $2, $3, $4, $5)
-           RETURNING username, first_name AS "firstName", last_name AS "lastName", email, is_admin`,
+           RETURNING username, first_name AS "firstName", last_name AS "lastName", email, is_admin AS "isAdmin"`,
         [
           username,
           hashedPassword,

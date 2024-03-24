@@ -14,7 +14,7 @@ class Comment {
                              username
                              )
        VALUES ($1, $2, $3, $4, $5)
-       RETURNING comment_id,
+       RETURNING comment_id AS "commentId",
                  theme_name AS "themeName", 
                  poem_id AS "poemId", 
                  highlighted_lines AS "highlightedLines",
