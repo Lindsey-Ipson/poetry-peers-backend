@@ -46,7 +46,7 @@ class User {
    * Returns { username, firstName, lastName, email }
    * Throws BadRequestError on duplicates.
    **/
-  static async register ({ username, password, firstName, lastName, email }) {
+  static async register ({ username, password, firstName, lastName, email, isAdmin }) {
     const duplicateCheck = await db.query(
           `SELECT username
            FROM users
@@ -66,8 +66,9 @@ class User {
             password,
             first_name,
             last_name,
-            email)
-           VALUES ($1, $2, $3, $4, $5)
+            email,
+            is_admin)
+           VALUES ($1, $2, $3, $4, $5, $6)
            RETURNING username, first_name AS "firstName", last_name AS "lastName", email, is_admin AS "isAdmin"`,
         [
           username,
@@ -75,6 +76,7 @@ class User {
           firstName,
           lastName,
           email,
+          isAdmin
         ],
     );
 

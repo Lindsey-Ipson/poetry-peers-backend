@@ -1,5 +1,7 @@
 const db = require("../db");
 
+// NOTE: Commenting functionality not yet implemented in the frontend application.
+
 class Comment {
   /** Create a comment (from data), update db, return new comment data.
    * Data should be { themeName, poemId, highlightedLines, commentText, username }
